@@ -1,0 +1,335 @@
+:root {
+  --bg: #14161c;
+  --bg-soft: #1c1f28;
+  --panel: #222634;
+  --line: #39414f;
+  --text: #e8eaf0;
+  --muted: #98a0b3;
+  --accent: #f6c177;
+  --accent-soft: #6ea8fe;
+  --spine: #6ea8fe;
+  --branch: #c7a3ff;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 50% -10%, #1d2230, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Home ---------- */
+.home {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 18vh 24px 0;
+  text-align: center;
+}
+.home-title {
+  font-size: 2.6rem;
+  margin: 0 0 0.3em;
+  letter-spacing: -0.02em;
+}
+.home-tagline {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0 0 2em;
+}
+.home-examples {
+  margin-top: 1.4em;
+  display: flex;
+  gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: var(--muted);
+}
+.chip {
+  text-decoration: none;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35em 0.9em;
+  font-size: 0.95rem;
+  transition: border-color 0.15s, color 0.15s;
+}
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Search ---------- */
+.search {
+  position: relative;
+  text-align: left;
+}
+.search-input {
+  width: 100%;
+  padding: 0.85em 1em;
+  font-size: 1.05rem;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--accent-soft);
+}
+.search-results {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 6px;
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+.search-result {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--text);
+  padding: 0.55em 0.7em;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+}
+.search-result:hover {
+  background: var(--bg-soft);
+}
+.search-result-label {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.search-result-latin {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+.search-result-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-left: auto;
+}
+
+/* ---------- Word page ---------- */
+.word-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.word-page-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(20, 22, 28, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 4;
+}
+.word-page-bar .brand {
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.word-page-bar .search {
+  flex: 1;
+  max-width: 460px;
+}
+.tree-scroll {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ---------- Lineage tree ---------- */
+.lineage {
+  position: relative;
+  margin: 0 auto;
+}
+.lineage-links {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.link {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+}
+.link-dashed {
+  stroke-dasharray: 5 5;
+  stroke: var(--branch);
+}
+.lineage-node {
+  position: absolute;
+}
+
+/* ---------- Word card ---------- */
+.word-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-decoration: none;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 6px;
+  transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
+}
+.word-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+.word-card.is-lineage {
+  border-color: var(--spine);
+}
+/* Same-level relatives: smaller and dimmer than the selected lineage. */
+.word-card.is-peer {
+  transform: scale(0.82);
+  border-color: var(--branch);
+  opacity: 0.92;
+}
+.word-card.is-peer:hover {
+  transform: scale(0.82) translateY(-2px);
+  opacity: 1;
+}
+.word-card.is-focus {
+  border-color: var(--accent);
+  background: #2a2536;
+  box-shadow: 0 0 0 2px var(--accent) inset;
+}
+.word-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+}
+/* Historic scripts get their dedicated fonts (with graceful fallback). The
+   Middle Persian forms mix Inscriptional Pahlavi and Parthian code points, so
+   both fonts are listed and the browser picks per glyph. */
+.lang-peo .word-label {
+  font-family: "Noto Sans Old Persian", system-ui, serif;
+}
+.lang-pal .word-label {
+  font-family: "Noto Sans Inscriptional Pahlavi", "Noto Sans Inscriptional Parthian",
+    system-ui, serif;
+}
+
+/* Dot: a node shown only as a junction on the connecting lines. */
+.lineage-dot {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px; /* centre on (cx, cy) */
+  border-radius: 50%;
+  background: var(--panel);
+  border: 2px solid var(--branch);
+  transition: transform 0.12s, background 0.12s;
+}
+.lineage-dot:hover {
+  transform: scale(1.5);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.word-latin {
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+.word-lang {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+/* ---------- Detail panel ---------- */
+.detail {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px;
+  border-top: 1px solid var(--line);
+}
+.detail-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  flex-wrap: wrap;
+}
+.detail-title {
+  font-size: 2rem;
+  margin: 0;
+}
+.detail-latin {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-left: 0.4em;
+}
+.detail-lang {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.detail-gloss {
+  color: var(--muted);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+.detail-notes {
+  line-height: 1.65;
+}
+.detail-related h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 0.4em;
+}
+.detail-related ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+.detail-related a {
+  color: var(--accent-soft);
+  text-decoration: none;
+}
+.detail-related a:hover {
+  text-decoration: underline;
+}
+
+.not-found {
+  padding: 24px;
+  color: var(--muted);
+}
+.not-found a {
+  color: var(--accent-soft);
+}
