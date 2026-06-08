@@ -28,18 +28,34 @@ For each seed it:
 4. Maps Wiktionary language codes → our `lang` codes / labels / tiers (see
    `LANGS` in the script). Unknown codes pass through with a tier-2 default.
 
-## Known limitations (the genuinely hard parts)
+## Convergence + sense filtering (done)
 
-- **Reconstruction convergence.** A chain may end at an inflected root form
-  (e.g. `*dʰwṓr`) rather than the lemma (`*dʰwer-`), so sibling branches don't
-  always merge at one PIE node. A normalization/alias step is needed.
-- **Competing etymologies.** Pages with `===Etymology 1===`/`2` or multiple
-  senses can pull in unrelated forms (e.g. Persian اندر "within" under در). We
-  currently take the first etymology and otherwise ignore the rest, by design.
+- **Root convergence.** Each page's `{{root|…|ine-pro|*X}}` gives the deep
+  canonical root; the chain's top is linked up to it, so sibling branches meet
+  on one node (e.g. door / Tür / foris / θύρα / در all reach `*dʰwer-`). The
+  chain's own PIE lemma (`*ph₂tḗr`, `*dʰwṓr`) is preserved as an intermediate
+  node rather than collapsed into the deeper verbal root (`*peh₂-`).
+- **Stop at PIE.** The chain stops at its first PIE node, so a second sense in
+  the same section (e.g. "mother" = dregs → `*muþraz`) no longer pollutes it.
+- **Section start fix.** Language sections are found even when first on the page
+  (no `{{also}}` hatnote), e.g. Latin-only `foris`.
+- **Multiword cognates dropped** (`mère de vinaigre` under "mother").
+- **On-disk cache** (`ingestion/.cache`, gitignored) makes re-runs instant.
+
+## Still open (the genuinely hard parts)
+
+- **Multi-etymology headwords.** A cognate page with two unrelated etymologies
+  (e.g. Persian در "door" vs اندر "within" ← `*h₁énteros`) can still bleed the
+  wrong sense in, since we take the first etymology blindly.
+- **Single-word wrong-sense cognates** (e.g. German `Essigmutter`) slip past the
+  multiword filter.
+- **Rate limiting.** This IP gets throttled hard; cognate fetches that fail
+  return empty and leave isolated nodes until a later run caches them.
 - **Comma-batched cognates** (`{{cog|da,nb,nn|dør}}`) and unmapped language
-  codes are skipped for now.
-- **Transliteration.** Non-Latin terms keep their native script in `label`;
-  `latin` is left null (a romanization step is still needed).
+  codes are still skipped / passed through.
+- **IDs + transliteration + language registry** (workstream #2): non-Latin ids
+  are mangled by `slug()`, `latin` is always null, and many codes lack a
+  tier/script/font mapping.
 
 ## Wiring into the app
 

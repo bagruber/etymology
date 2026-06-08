@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { lineageIds, type GraphIndex } from "../graph/graph.ts";
-import { TIER } from "../data/tiers.ts";
+import { tierOf } from "../data/tiers.ts";
 import { computeLayout, type PlacedLink } from "../graph/layout.ts";
 import WordNode from "./WordNode.tsx";
 
@@ -48,9 +48,9 @@ export default function LineageTree({ index, focusId }: Props) {
     // Classify: the focus's own lineage gets full cards; cognates at the same
     // era tier get smaller cards; everything else is just a connecting dot.
     const lineage = lineageIds(index, focusId);
-    const focusTier = TIER[index.byId.get(focusId)!.lang];
+    const focusTier = tierOf(index.byId.get(focusId)!.lang);
     const kindOf = (lang: string, id: string): NodeKind =>
-      lineage.has(id) ? "lineage" : TIER[lang as keyof typeof TIER] === focusTier ? "peer" : "dot";
+      lineage.has(id) ? "lineage" : tierOf(lang) === focusTier ? "peer" : "dot";
 
     return {
       nodes: layout.nodes,

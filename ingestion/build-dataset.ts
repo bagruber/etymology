@@ -13,6 +13,7 @@
 // competing etymologies, comma-batched cognates, non-matching reconstruction
 // spellings) are skipped or noted rather than guessed — see the TODOs.
 
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import type { Dataset, Edge, WordNode } from "../src/data/schema.ts";
 
 const API = "https://en.wiktionary.org/w/api.php";
@@ -59,14 +60,58 @@ function langInfo(wikiCode: string): LangInfo {
   return LANGS[wikiCode] ?? { code: wikiCode, label: wikiCode, tier: 2 };
 }
 
+// Resilient fetch: serves from an on-disk cache when present (so re-runs are
+// instant and don't hit the rate limit), otherwise paces requests, backs off on
+// 429 (honoring Retry-After), and returns "" rather than throwing so a single
+// failure doesn't lose the whole run.
 async function fetchWikitext(title: string): Promise<string> {
+  const cached = readCache(title);
+  if (cached !== null) return cached;
+  const text = await fetchWikitextUncached(title);
+  if (text) writeCache(title, text);
+  return text;
+}
+
+async function fetchWikitextUncached(title: string): Promise<string> {
   const url = `${API}?action=query&prop=revisions&rvprop=content&rvslots=main&titles=${encodeURIComponent(
     title
-  )}&format=json&formatversion=2`;
-  const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
-  if (!res.ok) throw new Error(`API ${res.status} for ${title}`);
-  const data = await res.json();
-  return data?.query?.pages?.[0]?.revisions?.[0]?.slots?.main?.content ?? "";
+  )}&format=json&formatversion=2&maxlag=5`;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    await delay(REQUEST_DELAY_MS);
+    const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+    if (res.ok) {
+      const data = await res.json();
+      return data?.query?.pages?.[0]?.revisions?.[0]?.slots?.main?.content ?? "";
+    }
+    if (res.status === 429 || res.status === 503) {
+      const retryAfter = Number(res.headers.get("retry-after")) * 1000;
+      const wait = retryAfter || 1500 * 2 ** attempt;
+      console.error(`  throttled (${res.status}) on "${title}", waiting ${wait}ms`);
+      await delay(wait);
+      continue;
+    }
+    console.error(`  ! API ${res.status} for "${title}" — skipping`);
+    return "";
+  }
+  console.error(`  ! gave up on "${title}" — skipping`);
+  return "";
+}
+
+const REQUEST_DELAY_MS = 1100;
+const MAX_COGNATES_PER_SEED = 8;
+
+// Tiny on-disk cache of fetched wikitext, keyed by page title.
+const CACHE_DIR = "ingestion/.cache";
+function cachePath(title: string): string {
+  return `${CACHE_DIR}/${encodeURIComponent(title)}.wiki`;
+}
+function readCache(title: string): string | null {
+  const path = cachePath(title);
+  return existsSync(path) ? readFileSync(path, "utf8") : null;
+}
+function writeCache(title: string, text: string): void {
+  mkdirSync(CACHE_DIR, { recursive: true });
+  writeFileSync(cachePath(title), text, "utf8");
 }
 
 /** Pull the first Etymology section's wikitext from a given ==Language== block. */
@@ -81,7 +126,9 @@ function extractEtymology(wikitext: string, wikiLangName: string): string {
 /** Return the body of the first heading of `level` whose title matches `name`. */
 function section(wikitext: string, level: number, name: string): string | null {
   const eq = "=".repeat(level);
-  const re = new RegExp(`\\n${eq}\\s*${name}\\s*${eq}\\s*([\\s\\S]*?)(?=\\n${eq}[^=]|\\n={1,${level}}[^=]|$)`);
+  // (?:^|\n) so it matches even when the section is the very first line (pages
+  // with no {{also}} hatnote, e.g. Latin-only "foris").
+  const re = new RegExp(`(?:^|\\n)${eq}\\s*${name}\\s*${eq}\\s*([\\s\\S]*?)(?=\\n${eq}[^=]|\\n={1,${level}}[^=]|$)`);
   const m = wikitext.match(re);
   return m ? m[1] : null;
 }
@@ -132,12 +179,31 @@ function upsert(p: Parsed, lang: LangInfo, term: string): WordNode {
   return n;
 }
 
+/** The canonical PIE root lemma from {{root|<lang>|ine-pro|*term}}, if present. */
+function parseRoot(etymText: string): string | null {
+  for (const t of templates(etymText, new Set(["root"]))) {
+    const i = t.findIndex((p, idx) => idx >= 2 && p === "ine-pro");
+    const term = cleanTerm(t[i + 1]);
+    if (i >= 0 && term) return term;
+  }
+  return null;
+}
+
 /**
  * Walk the inheritance chain in `etymText`. The {{inh|der|bor}} templates list
  * successive ancestors of `pageLang:pageTerm`; we wire each consecutive pair as
- * a child -> parent edge. Returns the chain (head = page term, last = root).
+ * a child -> parent edge. The chain's own PIE lemma is kept as a node (e.g.
+ * *ph₂tḗr, *dʰwṓr) and linked up to the deep canonical root from {{root}} (e.g.
+ * *peh₂-, *dʰwer-), so sibling branches converge on the shared root without the
+ * noun lemma being collapsed into the verbal root.
  */
-function parseChain(p: Parsed, etymText: string, pageLang: LangInfo, pageTerm: string): WordNode[] {
+function parseChain(
+  p: Parsed,
+  etymText: string,
+  pageLang: LangInfo,
+  pageTerm: string,
+  canonicalRoot: string | null
+): void {
   const steps = templates(etymText, new Set(["inh", "der", "bor"]));
   const chain: WordNode[] = [upsert(p, pageLang, pageTerm)];
   for (const t of steps) {
@@ -150,8 +216,16 @@ function parseChain(p: Parsed, etymText: string, pageLang: LangInfo, pageTerm: s
       p.edges.push({ from: child.id, to: node.id, type: edgeType(t[0], ancestorLang.tier) });
     }
     chain.push(node);
+    // The inheritance chain to PIE ends here; further {{inh}} in the same
+    // section belong to a different sense (e.g. "mother" = dregs -> *muþraz).
+    if (ancestorLang.tier === 0) break;
   }
-  return chain;
+  // Link the chain's top up to the deep canonical root (unless it is already it).
+  if (canonicalRoot) {
+    const root = upsert(p, langInfo("ine-pro"), canonicalRoot);
+    const top = chain[chain.length - 1];
+    if (top.id !== root.id) p.edges.push({ from: top.id, to: root.id, type: "root" });
+  }
 }
 
 function edgeType(template: string, parentTier: number): Edge["type"] {
@@ -160,12 +234,16 @@ function edgeType(template: string, parentTier: number): Edge["type"] {
   return "inherited";
 }
 
-/** {{cog|LANG|TERM}} cognates in our target languages. */
+/**
+ * {{cog|LANG|TERM}} cognates in our target languages. Multiword terms are
+ * dropped — they are almost always figurative compounds from an unrelated sense
+ * (e.g. "mère de vinaigre" under "mother"), not true single-word cognates.
+ */
 function parseCognates(etymText: string): { lang: LangInfo; term: string }[] {
   return templates(etymText, new Set(["cog", "cognate"]))
     .filter((t) => COGNATE_TARGETS.has(t[1])) // skip comma-batched / unmapped langs
     .map((t) => ({ lang: langInfo(t[1]), term: cleanTerm(t[2]) }))
-    .filter((c) => c.term);
+    .filter((c) => c.term && !c.term.includes(" "));
 }
 
 async function buildDataset(seeds: string[]): Promise<Dataset> {
@@ -177,20 +255,26 @@ async function buildDataset(seeds: string[]): Promise<Dataset> {
       console.error(`! no English etymology for "${seed}"`);
       continue;
     }
-    parseChain(p, etym, langInfo("en"), seed);
+    const root = parseRoot(etym);
+    parseChain(p, etym, langInfo("en"), seed, root);
 
-    // Recurse one level on cognates so each gets its own ancestor chain.
-    for (const cog of parseCognates(etym)) {
-      await delay(120);
+    // Recurse one level on cognates so each gets its own ancestor chain, made to
+    // converge on this root. Capped per seed to keep the request volume polite.
+    for (const cog of parseCognates(etym).slice(0, MAX_COGNATES_PER_SEED)) {
       const cogText = extractEtymology(await fetchWikitext(cog.term), wikiLangName(cog.lang.code));
-      if (cogText) parseChain(p, cogText, cog.lang, cog.term);
+      if (cogText) parseChain(p, cogText, cog.lang, cog.term, parseRoot(cogText) ?? root);
       else upsert(p, cog.lang, cog.term); // at least keep the cognate node
     }
-    await delay(120);
   }
-  // Drop edges whose endpoints somehow vanished (defensive).
+  // Drop dangling edges and de-duplicate (branches share ancestors).
   const ids = new Set(p.nodes.keys());
-  const edges = p.edges.filter((e) => ids.has(e.from) && ids.has(e.to));
+  const seen = new Set<string>();
+  const edges = p.edges.filter((e) => {
+    const key = `${e.from}|${e.to}|${e.type}`;
+    if (!ids.has(e.from) || !ids.has(e.to) || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
   return { nodes: [...p.nodes.values()], edges };
 }
 

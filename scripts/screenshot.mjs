@@ -12,6 +12,7 @@ const OUT = "screenshots";
 
 const PAGES = [
   { name: "home", path: "/" },
+  { name: "door", path: "/word/en-door" },
   { name: "father", path: "/word/en-father" },
   { name: "baradar", path: "/word/fa-baradar" },
   { name: "pedar", path: "/word/fa-pedar" },

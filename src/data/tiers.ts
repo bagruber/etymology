@@ -24,3 +24,16 @@ export const TIER: Record<Lang, number> = {
   el: 3,
   hi: 3, // modern
 };
+
+/**
+ * Tier of a language code, tolerant of codes the curated map doesn't list
+ * (e.g. pipeline output: enm, fro, gmw, piir). Reconstructed proto-stages fall
+ * to tier 1, PIE to 0, and anything else defaults to the ancient/medieval tier.
+ */
+export function tierOf(lang: string): number {
+  const known = TIER[lang as Lang];
+  if (known !== undefined) return known;
+  if (lang === "pie" || lang === "ine-pro") return 0;
+  if (lang.endsWith("-pro")) return 1;
+  return 2;
+}

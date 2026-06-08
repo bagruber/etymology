@@ -1,0 +1,906 @@
+{
+  "nodes": [
+    {
+      "id": "en-door",
+      "label": "door",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "enm-dore",
+      "label": "dore",
+      "latin": null,
+      "lang": "enm",
+      "langLabel": "Middle English"
+    },
+    {
+      "id": "ang-duru",
+      "label": "duru",
+      "latin": null,
+      "lang": "ang",
+      "langLabel": "Old English"
+    },
+    {
+      "id": "gmw-dur",
+      "label": "dur",
+      "latin": null,
+      "lang": "gmw",
+      "langLabel": "Proto-West Germanic"
+    },
+    {
+      "id": "pgmc-durz",
+      "label": "durz",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "pie-dhwo-r",
+      "label": "dʰwṓr",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "pie-dhwer",
+      "label": "dʰwer-",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "de-tu-r",
+      "label": "Tür",
+      "latin": null,
+      "lang": "de",
+      "langLabel": "German"
+    },
+    {
+      "id": "goh-turi",
+      "label": "turi",
+      "latin": null,
+      "lang": "goh",
+      "langLabel": "Old High German"
+    },
+    {
+      "id": "fr-hors",
+      "label": "hors",
+      "latin": null,
+      "lang": "fr",
+      "langLabel": "French"
+    },
+    {
+      "id": "fro-fors",
+      "label": "fors",
+      "latin": null,
+      "lang": "fro",
+      "langLabel": "fro"
+    },
+    {
+      "id": "la-fori-s",
+      "label": "forīs",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "it-fuori",
+      "label": "fuori",
+      "latin": null,
+      "lang": "it",
+      "langLabel": "Italian"
+    },
+    {
+      "id": "la-foris",
+      "label": "foris",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "pitc-fworis",
+      "label": "fworis",
+      "latin": null,
+      "lang": "pitc",
+      "langLabel": "Proto-Italic"
+    },
+    {
+      "id": "grc-θυ-ρα",
+      "label": "θύρα",
+      "latin": null,
+      "lang": "grc",
+      "langLabel": "Ancient Greek"
+    },
+    {
+      "id": "grk-pro-thura",
+      "label": "tʰurā",
+      "latin": null,
+      "lang": "grk-pro",
+      "langLabel": "grk-pro"
+    },
+    {
+      "id": "fa-در",
+      "label": "در",
+      "latin": null,
+      "lang": "fa",
+      "langLabel": "Persian"
+    },
+    {
+      "id": "fa-cls-اندر",
+      "label": "اندر",
+      "latin": null,
+      "lang": "fa-cls",
+      "langLabel": "fa-cls"
+    },
+    {
+      "id": "pal-𐭡𐭩𐭭",
+      "label": "𐭡𐭩𐭭",
+      "latin": null,
+      "lang": "pal",
+      "langLabel": "Middle Persian"
+    },
+    {
+      "id": "piir-hantara",
+      "label": "Hantara-",
+      "latin": null,
+      "lang": "piir",
+      "langLabel": "Proto-Indo-Iranian"
+    },
+    {
+      "id": "pie-h1e-nteros",
+      "label": "h₁énteros",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "ru-дверь",
+      "label": "дверь",
+      "latin": null,
+      "lang": "ru",
+      "langLabel": "Russian"
+    },
+    {
+      "id": "psl-dvьrь",
+      "label": "dvьrь",
+      "latin": null,
+      "lang": "psl",
+      "langLabel": "Proto-Slavic"
+    },
+    {
+      "id": "ine-bsl-pro-dwi-rs",
+      "label": "dwírs",
+      "latin": null,
+      "lang": "ine-bsl-pro",
+      "langLabel": "ine-bsl-pro"
+    },
+    {
+      "id": "hi-द-व-र",
+      "label": "द्वार",
+      "latin": null,
+      "lang": "hi",
+      "langLabel": "Hindi"
+    },
+    {
+      "id": "en-father",
+      "label": "father",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "pie-peh2",
+      "label": "peh₂-",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "en-mother",
+      "label": "mother",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "enm-moder",
+      "label": "moder",
+      "latin": null,
+      "lang": "enm",
+      "langLabel": "Middle English"
+    },
+    {
+      "id": "ang-mo-dor",
+      "label": "mōdor",
+      "latin": null,
+      "lang": "ang",
+      "langLabel": "Old English"
+    },
+    {
+      "id": "gmw-mo-der",
+      "label": "mōder",
+      "latin": null,
+      "lang": "gmw",
+      "langLabel": "Proto-West Germanic"
+    },
+    {
+      "id": "pgmc-mo-de-r",
+      "label": "mōdēr",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "pie-me-h2te-r",
+      "label": "méh₂tēr",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "de-essigmutter",
+      "label": "Essigmutter",
+      "latin": null,
+      "lang": "de",
+      "langLabel": "German"
+    },
+    {
+      "id": "it-madre",
+      "label": "madre",
+      "latin": null,
+      "lang": "it",
+      "langLabel": "Italian"
+    },
+    {
+      "id": "la-mater",
+      "label": "mater",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "pitc-ma-te-r",
+      "label": "mātēr",
+      "latin": null,
+      "lang": "pitc",
+      "langLabel": "Proto-Italic"
+    },
+    {
+      "id": "es-madre",
+      "label": "madre",
+      "latin": null,
+      "lang": "es",
+      "langLabel": "Spanish"
+    },
+    {
+      "id": "en-brother",
+      "label": "brother",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "ang-bro-þor",
+      "label": "brōþor",
+      "latin": null,
+      "lang": "ang",
+      "langLabel": "Old English"
+    },
+    {
+      "id": "gmw-bro-þer",
+      "label": "brōþer",
+      "latin": null,
+      "lang": "gmw",
+      "langLabel": "Proto-West Germanic"
+    },
+    {
+      "id": "pgmc-bro-þe-r",
+      "label": "brōþēr",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "pie-bhre-h2te-r",
+      "label": "bʰréh₂tēr",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "de-bruder",
+      "label": "Bruder",
+      "latin": null,
+      "lang": "de",
+      "langLabel": "German"
+    },
+    {
+      "id": "gmh-bruoder",
+      "label": "bruoder",
+      "latin": null,
+      "lang": "gmh",
+      "langLabel": "gmh"
+    },
+    {
+      "id": "goh-bruoder",
+      "label": "bruoder",
+      "latin": null,
+      "lang": "goh",
+      "langLabel": "Old High German"
+    },
+    {
+      "id": "la-fra-ter",
+      "label": "frāter",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "grc-βρα",
+      "label": "βρά",
+      "latin": null,
+      "lang": "grc",
+      "langLabel": "Ancient Greek"
+    },
+    {
+      "id": "fa-برادر",
+      "label": "برادر",
+      "latin": null,
+      "lang": "fa",
+      "langLabel": "Persian"
+    },
+    {
+      "id": "sa-भ-र-त",
+      "label": "भ्रातृ",
+      "latin": null,
+      "lang": "sa",
+      "langLabel": "Sanskrit"
+    },
+    {
+      "id": "piir-bhra-hta",
+      "label": "bʰráHtā",
+      "latin": null,
+      "lang": "piir",
+      "langLabel": "Proto-Indo-Iranian"
+    },
+    {
+      "id": "en-name",
+      "label": "name",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "enm-name",
+      "label": "name",
+      "latin": null,
+      "lang": "enm",
+      "langLabel": "Middle English"
+    },
+    {
+      "id": "ang-nama",
+      "label": "nama",
+      "latin": null,
+      "lang": "ang",
+      "langLabel": "Old English"
+    },
+    {
+      "id": "gmw-namo",
+      "label": "namō",
+      "latin": null,
+      "lang": "gmw",
+      "langLabel": "Proto-West Germanic"
+    },
+    {
+      "id": "pgmc-namo",
+      "label": "namô",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "pie-h1no-mn",
+      "label": "h₁nómn̥",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "de-nahme",
+      "label": "Nahme",
+      "latin": null,
+      "lang": "de",
+      "langLabel": "German"
+    },
+    {
+      "id": "gmh-na-me",
+      "label": "nāme",
+      "latin": null,
+      "lang": "gmh",
+      "langLabel": "gmh"
+    },
+    {
+      "id": "goh-na-ma",
+      "label": "nāma",
+      "latin": null,
+      "lang": "goh",
+      "langLabel": "Old High German"
+    },
+    {
+      "id": "pgmc-ne-mo",
+      "label": "nēmō",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "la-no-men",
+      "label": "nōmen",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "es-nombre",
+      "label": "nombre",
+      "latin": null,
+      "lang": "es",
+      "langLabel": "Spanish"
+    },
+    {
+      "id": "ru-имя",
+      "label": "имя",
+      "latin": null,
+      "lang": "ru",
+      "langLabel": "Russian"
+    },
+    {
+      "id": "psl-jьme",
+      "label": "jьmę",
+      "latin": null,
+      "lang": "psl",
+      "langLabel": "Proto-Slavic"
+    },
+    {
+      "id": "ine-bsl-pro-inˀmin",
+      "label": "inˀmin",
+      "latin": null,
+      "lang": "ine-bsl-pro",
+      "langLabel": "ine-bsl-pro"
+    },
+    {
+      "id": "sa-न-मन",
+      "label": "नामन्",
+      "latin": null,
+      "lang": "sa",
+      "langLabel": "Sanskrit"
+    },
+    {
+      "id": "piir-hna-ma",
+      "label": "Hnā́ma",
+      "latin": null,
+      "lang": "piir",
+      "langLabel": "Proto-Indo-Iranian"
+    },
+    {
+      "id": "en-three",
+      "label": "three",
+      "latin": null,
+      "lang": "en",
+      "langLabel": "English"
+    },
+    {
+      "id": "enm-thre",
+      "label": "thre",
+      "latin": null,
+      "lang": "enm",
+      "langLabel": "Middle English"
+    },
+    {
+      "id": "ang-þri",
+      "label": "þrī",
+      "latin": null,
+      "lang": "ang",
+      "langLabel": "Old English"
+    },
+    {
+      "id": "gmw-þri-ʀ",
+      "label": "þrīʀ",
+      "latin": null,
+      "lang": "gmw",
+      "langLabel": "Proto-West Germanic"
+    },
+    {
+      "id": "pgmc-þri-z",
+      "label": "þrīz",
+      "latin": null,
+      "lang": "pgmc",
+      "langLabel": "Proto-Germanic"
+    },
+    {
+      "id": "pie-tre-yes",
+      "label": "tréyes",
+      "latin": null,
+      "lang": "pie",
+      "langLabel": "Proto-Indo-European"
+    },
+    {
+      "id": "de-drei",
+      "label": "drei",
+      "latin": null,
+      "lang": "de",
+      "langLabel": "German"
+    },
+    {
+      "id": "gmh-dri",
+      "label": "drī",
+      "latin": null,
+      "lang": "gmh",
+      "langLabel": "gmh"
+    },
+    {
+      "id": "goh-dri",
+      "label": "dri",
+      "latin": null,
+      "lang": "goh",
+      "langLabel": "Old High German"
+    },
+    {
+      "id": "la-tre-s",
+      "label": "trēs",
+      "latin": null,
+      "lang": "la",
+      "langLabel": "Latin"
+    },
+    {
+      "id": "el-τρει-ς",
+      "label": "τρεῖς",
+      "latin": null,
+      "lang": "el",
+      "langLabel": "Modern Greek"
+    }
+  ],
+  "edges": [
+    {
+      "from": "en-door",
+      "to": "enm-dore",
+      "type": "inherited"
+    },
+    {
+      "from": "enm-dore",
+      "to": "ang-duru",
+      "type": "inherited"
+    },
+    {
+      "from": "ang-duru",
+      "to": "gmw-dur",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-dur",
+      "to": "pgmc-durz",
+      "type": "inherited"
+    },
+    {
+      "from": "pgmc-durz",
+      "to": "pie-dhwo-r",
+      "type": "root"
+    },
+    {
+      "from": "pie-dhwo-r",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "de-tu-r",
+      "to": "goh-turi",
+      "type": "inherited"
+    },
+    {
+      "from": "goh-turi",
+      "to": "gmw-dur",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-dur",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "fr-hors",
+      "to": "fro-fors",
+      "type": "inherited"
+    },
+    {
+      "from": "fro-fors",
+      "to": "la-fori-s",
+      "type": "inherited"
+    },
+    {
+      "from": "la-fori-s",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "it-fuori",
+      "to": "la-fori-s",
+      "type": "inherited"
+    },
+    {
+      "from": "la-foris",
+      "to": "pitc-fworis",
+      "type": "inherited"
+    },
+    {
+      "from": "pitc-fworis",
+      "to": "pie-dhwo-r",
+      "type": "root"
+    },
+    {
+      "from": "grc-θυ-ρα",
+      "to": "grk-pro-thura",
+      "type": "inherited"
+    },
+    {
+      "from": "grk-pro-thura",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "fa-در",
+      "to": "fa-cls-اندر",
+      "type": "inherited"
+    },
+    {
+      "from": "fa-cls-اندر",
+      "to": "pal-𐭡𐭩𐭭",
+      "type": "inherited"
+    },
+    {
+      "from": "pal-𐭡𐭩𐭭",
+      "to": "piir-hantara",
+      "type": "inherited"
+    },
+    {
+      "from": "piir-hantara",
+      "to": "pie-h1e-nteros",
+      "type": "root"
+    },
+    {
+      "from": "pie-h1e-nteros",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "ru-дверь",
+      "to": "psl-dvьrь",
+      "type": "inherited"
+    },
+    {
+      "from": "psl-dvьrь",
+      "to": "ine-bsl-pro-dwi-rs",
+      "type": "inherited"
+    },
+    {
+      "from": "ine-bsl-pro-dwi-rs",
+      "to": "pie-dhwo-r",
+      "type": "root"
+    },
+    {
+      "from": "hi-द-व-र",
+      "to": "pie-dhwer",
+      "type": "root"
+    },
+    {
+      "from": "en-father",
+      "to": "pie-peh2",
+      "type": "root"
+    },
+    {
+      "from": "en-mother",
+      "to": "enm-moder",
+      "type": "inherited"
+    },
+    {
+      "from": "enm-moder",
+      "to": "ang-mo-dor",
+      "type": "inherited"
+    },
+    {
+      "from": "ang-mo-dor",
+      "to": "gmw-mo-der",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-mo-der",
+      "to": "pgmc-mo-de-r",
+      "type": "inherited"
+    },
+    {
+      "from": "pgmc-mo-de-r",
+      "to": "pie-me-h2te-r",
+      "type": "root"
+    },
+    {
+      "from": "it-madre",
+      "to": "la-mater",
+      "type": "inherited"
+    },
+    {
+      "from": "la-mater",
+      "to": "pitc-ma-te-r",
+      "type": "inherited"
+    },
+    {
+      "from": "pitc-ma-te-r",
+      "to": "pie-me-h2te-r",
+      "type": "root"
+    },
+    {
+      "from": "es-madre",
+      "to": "pitc-ma-te-r",
+      "type": "inherited"
+    },
+    {
+      "from": "en-brother",
+      "to": "ang-bro-þor",
+      "type": "inherited"
+    },
+    {
+      "from": "ang-bro-þor",
+      "to": "gmw-bro-þer",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-bro-þer",
+      "to": "pgmc-bro-þe-r",
+      "type": "inherited"
+    },
+    {
+      "from": "pgmc-bro-þe-r",
+      "to": "pie-bhre-h2te-r",
+      "type": "root"
+    },
+    {
+      "from": "de-bruder",
+      "to": "gmh-bruoder",
+      "type": "inherited"
+    },
+    {
+      "from": "gmh-bruoder",
+      "to": "goh-bruoder",
+      "type": "inherited"
+    },
+    {
+      "from": "goh-bruoder",
+      "to": "gmw-bro-þer",
+      "type": "inherited"
+    },
+    {
+      "from": "grc-βρα",
+      "to": "pie-bhre-h2te-r",
+      "type": "root"
+    },
+    {
+      "from": "sa-भ-र-त",
+      "to": "piir-bhra-hta",
+      "type": "inherited"
+    },
+    {
+      "from": "piir-bhra-hta",
+      "to": "pie-bhre-h2te-r",
+      "type": "root"
+    },
+    {
+      "from": "en-name",
+      "to": "enm-name",
+      "type": "inherited"
+    },
+    {
+      "from": "enm-name",
+      "to": "ang-nama",
+      "type": "inherited"
+    },
+    {
+      "from": "ang-nama",
+      "to": "gmw-namo",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-namo",
+      "to": "pgmc-namo",
+      "type": "inherited"
+    },
+    {
+      "from": "pgmc-namo",
+      "to": "pie-h1no-mn",
+      "type": "root"
+    },
+    {
+      "from": "de-nahme",
+      "to": "gmh-na-me",
+      "type": "inherited"
+    },
+    {
+      "from": "gmh-na-me",
+      "to": "goh-na-ma",
+      "type": "inherited"
+    },
+    {
+      "from": "goh-na-ma",
+      "to": "pgmc-ne-mo",
+      "type": "inherited"
+    },
+    {
+      "from": "es-nombre",
+      "to": "la-no-men",
+      "type": "inherited"
+    },
+    {
+      "from": "ru-имя",
+      "to": "psl-jьme",
+      "type": "inherited"
+    },
+    {
+      "from": "psl-jьme",
+      "to": "ine-bsl-pro-inˀmin",
+      "type": "inherited"
+    },
+    {
+      "from": "ine-bsl-pro-inˀmin",
+      "to": "pie-h1no-mn",
+      "type": "root"
+    },
+    {
+      "from": "sa-न-मन",
+      "to": "piir-hna-ma",
+      "type": "inherited"
+    },
+    {
+      "from": "piir-hna-ma",
+      "to": "pie-h1no-mn",
+      "type": "root"
+    },
+    {
+      "from": "en-three",
+      "to": "enm-thre",
+      "type": "inherited"
+    },
+    {
+      "from": "enm-thre",
+      "to": "ang-þri",
+      "type": "inherited"
+    },
+    {
+      "from": "ang-þri",
+      "to": "gmw-þri-ʀ",
+      "type": "inherited"
+    },
+    {
+      "from": "gmw-þri-ʀ",
+      "to": "pgmc-þri-z",
+      "type": "inherited"
+    },
+    {
+      "from": "pgmc-þri-z",
+      "to": "pie-tre-yes",
+      "type": "root"
+    },
+    {
+      "from": "de-drei",
+      "to": "gmh-dri",
+      "type": "inherited"
+    },
+    {
+      "from": "gmh-dri",
+      "to": "goh-dri",
+      "type": "inherited"
+    },
+    {
+      "from": "goh-dri",
+      "to": "gmw-þri-ʀ",
+      "type": "inherited"
+    }
+  ]
+}
