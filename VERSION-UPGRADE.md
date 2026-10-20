@@ -1,7 +1,7 @@
 # Versions-Update — etymology
 
 *Briefing fuer eine eigene Claude-Code-Sitzung in diesem Repo. Angelegt 26.08.2026,
-nach Welle 1 und 2 fortgeschrieben. Nach erledigtem Update loeschen.*
+fortgeschrieben am 20.10.2026. Nach erledigtem Update loeschen.*
 
 ## Auftrag
 
@@ -11,7 +11,29 @@ gemeinsamen pnpm-Store, der exakt so weit dedupliziert, wie die Versionen
 uebereinstimmen. Gemessen: ein Repo mit abweichenden Versionen kostet ~158 MB, ein
 Versions-Zwilling ~8 MB.
 
-**Dieses Repo ist eines der letzten drei.** pridemap ist am 26.08.2026 auf React 19.2.8, Vite 8.2.2 und plugin-react 6.1.0 gezogen worden — Build und Laufzeitprobe gruen. Vier Majors gleichzeitig — hier besonders strikt in Einzelschritten vorgehen.
+**Dieses Repo ist eines der letzten zwei**, zusammen mit `home_dashboard/frontend`.
+Die beiden sind der Grund, warum von TypeScript, Vite, React und den React-Typen
+noch je ein zweiter Stand im Store liegt. Vier Majors gleichzeitig — hier besonders
+strikt in Einzelschritten vorgehen.
+
+## Was seit August dazukam (20.10.2026)
+
+- **Die Ziele sind gestiegen**: React 19.3, Vite 8.3, @types/node 26.6 (Tabelle
+  unten). Die uebrigen Repos stehen darauf, mit Build, Tests und
+  Screenshot-Vergleich gruen.
+- **React 19.3 bricht gegenueber 19.2 nichts.** Der eigentliche Sprung hier ist
+  18 -> 19. Am 20.10.2026 geprueft: Der Code nutzt schon `createRoot`;
+  `ReactDOM.render`, `defaultProps`, `propTypes`, der globale `JSX`-Namespace und
+  `useRef()` ohne Argument kommen nicht vor. Die Typen werden trotzdem meckern,
+  wo sie es tun, zeigt erst `tsc`.
+- **React Router: Ziel ist 7.18.4, nicht 8.** v8 ist erschienen und entfernt
+  `react-router-dom` ganz (Importe kommen dann aus `react-router`). Die Hausbasis
+  bleibt vorerst auf 7, das weiter Sicherheitsupdates bekommt.
+- **`playwright` fuer `scripts/screenshot.mjs`** steht nicht in der Hausbasis und
+  bringt sein eigenes Chromium mit (1.64 braeuchte Build 1248, im Cache liegt
+  1234). Einfacher: `playwright-core` ^1.64.1 aus der Hausbasis und
+  `chromium.launch({ channel: 'chrome' })`, wie pridemap und haushaltvis. Dann
+  entfaellt der Browser-Download ganz.
 
 ## Was bereits steht (26.08.2026)
 
@@ -37,28 +59,22 @@ Erfahrungen daraus, die fuer dieses Repo relevant sind:
 - **Vite 8 und plugin-react 6 verlangen Node ^20.19 oder >=22.12.** Die CI-Workflows
   stehen auf `node-version: 22`, was aktuelle 22.x aufloest und damit passt.
 
-## Hausbasis
-
-| Paket | Zielversion | Stand |
-|---|---|---|
-| typescript | ~7.0.2 | erledigt in 13 Repos |
-| @types/node | ^26.3.0 | erledigt in 13 Repos |
-| vite | ^8.2.2 | erledigt in 12 Repos |
-| @vitejs/plugin-react | ^6.1.0 | erledigt in 12 Repos |
-| react / react-dom | 19.2.x | hier offen |
-| tailwindcss | 4.x | nur home_dashboard offen |
-| react-router-dom | 7.x | nur etymology offen |
-
 ## Noch zu tun in diesem Repo
+
+Die Zielversionen stehen in `../hausbasis/baseline.json`, und
+`node ../hausbasis/check.mjs --kurz` zeigt, wo dieses Repo abweicht. Gilt bei
+Abweichung die Baseline, nicht diese Tabelle. Stand 20.10.2026:
 
 | Paket | Ist | Ziel |
 |---|---|---|
-| `react / react-dom` | ^18.3.1 | ^19.2.x |
-| `react-router-dom` | ^6.26.2 | ^7.x |
-| `vite` | ^5.4.5 | ^8.2.2 |
-| `@vitejs/plugin-react` | ^4.3.1 | ^6.1.0 |
+| `react / react-dom` | ^18.3.1 | ^19.3.1 |
+| `@types/react / @types/react-dom` | ^18.3.x | ^19.3.0 |
+| `react-router-dom` | ^6.26.2 | ^7.18.4 |
+| `vite` | ^5.4.5 | ^8.3.4 |
+| `@vitejs/plugin-react` | ^4.3.1 | ^6.1.2 |
 | `typescript` | ^5.5.4 | ~7.0.2 |
-| `@types/node` | ^20.16.5 | ^26.3.0 |
+| `@types/node` | ^20.16.5 | ^26.6.5 |
+| `playwright` | ^1.47.2 | `playwright-core` ^1.64.1, siehe oben |
 
 ## Besonderheit
 
